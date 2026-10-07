@@ -1,0 +1,1669 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family: Arial, sans-serif;
+
+    background:
+        radial-gradient(circle at top, #5c164f 0%, transparent 45%),
+        linear-gradient(135deg, #16001f, #4b123f, #17001f);
+
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    padding: 20px;
+}
+
+.birthday-card {
+    width: min(90%, 650px);
+
+    max-height: calc(100vh - 40px);
+
+    padding: 40px 35px;
+
+    text-align: center;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    border-radius: 30px;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.4),
+        0 0 50px rgba(255, 80, 190, 0.08);
+
+    backdrop-filter: blur(10px);
+
+    animation: cardAppear 1.5s ease;
+
+    position: relative;
+
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+}
+
+.small-text {
+    font-size: 15px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: clamp(40px, 8vw, 72px);
+    margin: 0;
+    line-height: 1.1;
+    min-height: 1.2em;
+}
+
+#typing-text {
+    color: #ffffff;
+
+    text-shadow:
+        0 0 5px #ffffff,
+        0 0 10px #ffb6e6,
+        0 0 20px #ff8bd4,
+        0 0 40px #ff5fc7,
+        0 0 70px #ff3fbd;
+
+    animation:
+        birthdayGlow 1.5s ease-in-out infinite alternate;
+}
+
+.cursor {
+    color: #ff9bd2;
+
+    text-shadow:
+        0 0 10px #ff9bd2,
+        0 0 25px #ff5fc7;
+
+    animation:
+        blink 0.7s infinite;
+}
+
+.subtitle {
+    font-size: 19px;
+    line-height: 1.6;
+
+    margin: 25px auto;
+
+    max-width: 500px;
+
+    opacity: 0.9;
+}
+
+#start-button,
+#next-button,
+#mystery-next-button,
+#mic-button,
+#cake-next-button {
+    margin-top: 20px;
+
+    padding: 16px 30px;
+
+    border: none;
+
+    border-radius: 50px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff75c8,
+            #ff3fac
+        );
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 0 15px rgba(255, 80, 190, 0.5),
+        0 0 35px rgba(255, 80, 190, 0.3);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+#start-button {
+    opacity: 0;
+
+    transform: translateY(15px);
+
+    pointer-events: none;
+}
+
+#start-button.show {
+    opacity: 1;
+
+    transform: translateY(0);
+
+    pointer-events: auto;
+}
+
+#start-button:hover,
+#next-button:hover,
+#mystery-next-button:hover,
+#mic-button:hover,
+#cake-next-button:hover {
+    transform:
+        translateY(-3px)
+        scale(1.03);
+
+    box-shadow:
+        0 0 20px rgba(255, 100, 200, 0.7),
+        0 0 50px rgba(255, 80, 190, 0.5);
+}
+
+.cake {
+    font-size: 70px;
+
+    margin-bottom: 15px;
+
+    animation:
+        floatCake 2s ease-in-out infinite;
+}
+
+.challenge {
+    margin-top: 15px;
+
+    animation:
+        challengeAppear 0.7s ease;
+}
+
+.challenge-label {
+    font-size: 13px;
+
+    letter-spacing: 4px;
+
+    color: #ff9bd2;
+
+    margin-bottom: 8px;
+}
+
+.challenge h2 {
+    font-size: 32px;
+
+    margin: 8px 0;
+}
+
+.challenge p {
+    font-size: 17px;
+
+    line-height: 1.4;
+
+    opacity: 0.9;
+
+    margin: 10px auto;
+}
+
+
+/* ===============================
+   BALLOONS
+================================ */
+
+#balloon-area {
+    width: 100%;
+
+    height: 220px;
+
+    margin-top: 15px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255, 255, 255, 0.08),
+            transparent 70%
+        );
+}
+
+.balloon {
+    position: absolute;
+
+    width: 50px;
+
+    height: 64px;
+
+    border-radius:
+        50% 50% 45% 45%;
+
+    cursor: pointer;
+
+    animation:
+        balloonFloat 2.5s ease-in-out infinite;
+
+    transition:
+        transform 0.15s ease,
+        opacity 0.2s ease;
+}
+
+.balloon::before {
+    content: "";
+
+    position: absolute;
+
+    width: 9px;
+
+    height: 9px;
+
+    background:
+        rgba(255, 255, 255, 0.65);
+
+    border-radius: 50%;
+
+    top: 12px;
+
+    left: 13px;
+}
+
+.balloon::after {
+    content: "";
+
+    position: absolute;
+
+    width: 20px;
+
+    height: 55px;
+
+    top: 61px;
+
+    left: 16px;
+
+    border-left:
+        2px solid rgba(255, 255, 255, 0.55);
+
+    border-radius: 50%;
+
+    transform:
+        rotate(8deg);
+
+    transform-origin:
+        top center;
+
+    pointer-events: none;
+}
+
+.balloon:hover {
+    transform:
+        scale(1.1);
+}
+
+.balloon.pink {
+    background: #ff5fa2;
+
+    box-shadow:
+        0 0 20px
+        rgba(255, 95, 162, 0.7);
+}
+
+.balloon.purple {
+    background: #a66cff;
+
+    box-shadow:
+        0 0 20px
+        rgba(166, 108, 255, 0.7);
+}
+
+.balloon.blue {
+    background: #5fc9ff;
+
+    box-shadow:
+        0 0 20px
+        rgba(95, 201, 255, 0.7);
+}
+
+.balloon.gold {
+    background: #ffc857;
+
+    box-shadow:
+        0 0 20px
+        rgba(255, 200, 87, 0.7);
+}
+
+.balloon.red {
+    background: #ff5f6d;
+
+    box-shadow:
+        0 0 20px
+        rgba(255, 95, 109, 0.7);
+}
+
+#balloon-score {
+    margin-top: 10px;
+
+    font-size: 16px;
+
+    opacity: 0.85;
+}
+
+#balloon-complete {
+    margin-top: 12px;
+
+    animation:
+        challengeAppear 0.6s ease;
+}
+
+.complete-icon {
+    font-size: 42px;
+
+    line-height: 1;
+}
+
+#balloon-complete h3 {
+    font-size: 26px;
+
+    margin: 5px 0;
+}
+
+#balloon-complete p {
+    margin: 4px 0;
+}
+
+#balloon-complete #next-button {
+    margin-top: 10px;
+}
+
+
+/* ===============================
+   ANGEL
+================================ */
+
+#angel-transition {
+    text-align: center;
+
+    margin-top: 20px;
+
+    animation:
+        angelAppear 0.5s ease;
+}
+
+.angel {
+    font-size: 75px;
+
+    animation:
+        angelFloat 1.2s ease-in-out infinite;
+
+    filter:
+        drop-shadow(
+            0 0 15px
+            rgba(255, 255, 255, 0.8)
+        );
+}
+
+#angel-transition p {
+    margin-top: 12px;
+
+    font-size: 17px;
+
+    opacity: 0.9;
+}
+
+
+/* ===============================
+   QUIZ
+================================ */
+
+#quiz-challenge {
+    margin-top: 10px;
+}
+
+.quiz-question {
+    animation:
+        questionAppear 0.5s ease;
+}
+
+.question-number {
+    font-size: 12px;
+
+    letter-spacing: 3px;
+
+    color: #ff9bd2;
+
+    margin-top: 18px;
+
+    margin-bottom: 8px;
+}
+
+.quiz-question h3 {
+    font-size: 22px;
+
+    line-height: 1.4;
+
+    margin: 10px auto 18px;
+
+    max-width: 540px;
+}
+
+.quiz-options {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    max-width: 520px;
+
+    margin: 0 auto;
+}
+
+.quiz-option {
+    width: 100%;
+
+    padding: 13px 16px;
+
+    border-radius: 15px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.18);
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    color: white;
+
+    font-size: 16px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.quiz-option:hover {
+    transform:
+        translateX(4px);
+
+    background:
+        rgba(255, 95, 190, 0.2);
+
+    border-color:
+        rgba(255, 155, 210, 0.6);
+}
+
+.quiz-option.selected {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255, 117, 200, 0.45),
+            rgba(255, 63, 172, 0.3)
+        );
+
+    border-color:
+        #ff9bd2;
+
+    box-shadow:
+        0 0 15px
+        rgba(255, 80, 190, 0.3);
+}
+
+#quiz-progress {
+    margin-top: 18px;
+
+    font-size: 14px;
+
+    opacity: 0.7;
+}
+
+
+/* ===============================
+   MYSTERY BOX
+================================ */
+
+#mystery-challenge {
+    margin-top: 5px;
+}
+
+#mystery-box-area {
+    margin-top: 20px;
+
+    min-height: 240px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+#mystery-box {
+    position: relative;
+
+    width: 150px;
+
+    height: 150px;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    padding: 0;
+
+    transition:
+        transform 0.25s ease;
+}
+
+#mystery-box:hover {
+    transform:
+        scale(1.05);
+}
+
+.box-body {
+    position: absolute;
+
+    width: 120px;
+
+    height: 95px;
+
+    left: 15px;
+
+    bottom: 5px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff5fa2,
+            #c52d82
+        );
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 15px 30px
+        rgba(0, 0, 0, 0.35),
+
+        0 0 25px
+        rgba(255, 95, 162, 0.35);
+}
+
+.box-lid {
+    position: absolute;
+
+    width: 135px;
+
+    height: 32px;
+
+    left: 7px;
+
+    top: 38px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff75b9,
+            #d7388c
+        );
+
+    border-radius: 7px;
+
+    z-index: 3;
+
+    box-shadow:
+        0 5px 12px
+        rgba(0, 0, 0, 0.25);
+
+    transition:
+        transform 0.7s ease;
+}
+
+.box-ribbon-vertical {
+    position: absolute;
+
+    width: 22px;
+
+    height: 95px;
+
+    left: 49px;
+
+    top: 0;
+
+    background:
+        rgba(255, 215, 235, 0.9);
+}
+
+.box-ribbon-horizontal {
+    position: absolute;
+
+    width: 120px;
+
+    height: 18px;
+
+    left: 0;
+
+    top: 34px;
+
+    background:
+        rgba(255, 215, 235, 0.9);
+}
+
+#box-hint {
+    margin-top: 20px;
+
+    font-size: 14px;
+
+    opacity: 0.75;
+
+    animation:
+        hintPulse 1.5s ease-in-out infinite;
+}
+
+#mystery-box.opening {
+    animation:
+        boxShake 0.5s ease;
+}
+
+#mystery-box.opened .box-lid {
+    transform:
+        translateY(-55px)
+        rotate(-8deg);
+}
+
+#mystery-message {
+    margin-top: 15px;
+
+    animation:
+        messageAppear 0.7s ease;
+}
+
+.message-heart {
+    font-size: 45px;
+
+    margin-bottom: 10px;
+
+    animation:
+        heartFloat 1.5s ease-in-out infinite;
+}
+
+#mystery-message p {
+    max-width: 530px;
+
+    margin: 12px auto;
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+    opacity: 0.95;
+}
+
+#mystery-message #mystery-next-button {
+    margin-top: 10px;
+}
+
+
+/* ===============================
+   CHALLENGE 04 - CAKE
+================================ */
+
+#cake-challenge {
+    margin-top: 2px;
+
+    text-align: center;
+
+    padding-bottom: 5px;
+}
+
+#cake-challenge > p {
+    max-width: 520px;
+
+    margin-top: 6px;
+
+    margin-bottom: 2px;
+}
+
+
+/* ===============================
+   CAKE
+================================ */
+
+#birthday-cake {
+    position: relative;
+
+    width: 340px;
+
+    height: 270px;
+
+    margin: 0 auto -20px;
+
+    transform:
+        scale(0.82);
+
+    transform-origin:
+        top center;
+
+    animation:
+        cakeAppear 0.8s ease;
+}
+
+.teddy {
+    position: absolute;
+
+    z-index: 8;
+
+    font-size: 68px;
+
+    line-height: 1;
+
+    filter:
+        drop-shadow(
+            0 5px 8px
+            rgba(0, 0, 0, 0.2)
+        );
+
+    animation:
+        teddyFloat 2.5s ease-in-out infinite;
+}
+
+.teddy-left {
+    left: 92px;
+
+    top: 18px;
+
+    transform:
+        rotate(-5deg);
+}
+
+.teddy-right {
+    right: 88px;
+
+    top: 18px;
+
+    transform:
+        rotate(5deg);
+
+    animation-delay:
+        0.3s;
+}
+
+
+/* Pink bow */
+
+.cake-bow {
+    position: absolute;
+
+    z-index: 10;
+
+    top: 62px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width: 70px;
+
+    height: 38px;
+}
+
+.cake-bow span {
+    position: absolute;
+
+    width: 38px;
+
+    height: 25px;
+
+    background:
+        #f49ab8;
+
+    border-radius:
+        70% 30% 70% 30%;
+}
+
+.cake-bow span:first-child {
+    left: 0;
+
+    transform:
+        rotate(25deg);
+}
+
+.cake-bow span:nth-child(2) {
+    right: 0;
+
+    transform:
+        rotate(-25deg);
+}
+
+.cake-bow div {
+    position: absolute;
+
+    width: 16px;
+
+    height: 16px;
+
+    left: 27px;
+
+    top: 7px;
+
+    border-radius: 50%;
+
+    background:
+        #e879a1;
+}
+
+
+/* Candle */
+
+.candle {
+    position: absolute;
+
+    z-index: 12;
+
+    left: 50%;
+
+    top: 2px;
+
+    transform:
+        translateX(-50%);
+
+    width: 25px;
+
+    height: 100px;
+}
+
+.candle-stick {
+    position: absolute;
+
+    bottom: 0;
+
+    left: 7px;
+
+    width: 11px;
+
+    height: 70px;
+
+    border-radius: 6px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #e6c9c9,
+            #fff7f7,
+            #e2baba
+        );
+
+    box-shadow:
+        inset 0 0 4px
+        rgba(0, 0, 0, 0.15);
+}
+
+.candle-stick::after {
+    content: "";
+
+    position: absolute;
+
+    top: 12px;
+
+    left: 0;
+
+    width: 11px;
+
+    height: 3px;
+
+    background:
+        #ef8eac;
+
+    box-shadow:
+        0 12px #ef8eac,
+        0 24px #ef8eac;
+}
+
+#candle-flame {
+    position: absolute;
+
+    z-index: 5;
+
+    width: 20px;
+
+    height: 32px;
+
+    left: 2px;
+
+    top: -25px;
+
+    border-radius:
+        50% 50% 50% 50%;
+
+    background:
+        radial-gradient(
+            ellipse at center bottom,
+            #fff9a6 0%,
+            #ffd45a 35%,
+            #ff8a3d 65%,
+            transparent 70%
+        );
+
+    filter:
+        drop-shadow(
+            0 0 8px #ffb347
+        );
+
+    transform:
+        rotate(2deg);
+
+    animation:
+        flameFlicker 0.15s ease-in-out infinite alternate;
+}
+
+#candle-flame::after {
+    content: "";
+
+    position: absolute;
+
+    width: 7px;
+
+    height: 15px;
+
+    left: 6px;
+
+    top: 10px;
+
+    border-radius: 50%;
+
+    background:
+        #fffdf0;
+}
+
+
+/* Cake top */
+
+.cake-top {
+    position: absolute;
+
+    z-index: 5;
+
+    left: 30px;
+
+    top: 108px;
+
+    width: 280px;
+
+    height: 62px;
+
+    border-radius:
+        50% 50% 35% 35%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff8f5,
+            #f9e9e8
+        );
+
+    box-shadow:
+        0 7px 12px
+        rgba(0, 0, 0, 0.12);
+}
+
+.cake-cream {
+    position: absolute;
+
+    width: 100%;
+
+    height: 28px;
+
+    left: 0;
+
+    top: 2px;
+
+    border-radius: 50%;
+
+    background:
+        #fffafa;
+
+    box-shadow:
+        inset 0 -5px 8px
+        rgba(230, 180, 190, 0.25);
+}
+
+
+/* Cake body */
+
+.cake-body {
+    position: absolute;
+
+    z-index: 3;
+
+    left: 38px;
+
+    top: 145px;
+
+    width: 264px;
+
+    height: 125px;
+
+    border-radius:
+        0 0 28px 28px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #fff9f6,
+            #fceeed,
+            #fff9f6
+        );
+
+    box-shadow:
+        0 12px 20px
+        rgba(0, 0, 0, 0.2);
+}
+
+
+/* Pink frosting */
+
+.cake-drip {
+    position: absolute;
+
+    top: -3px;
+
+    background:
+        #f4b1c6;
+
+    width: 70px;
+
+    height: 42px;
+
+    border-radius:
+        0 0 25px 25px;
+}
+
+.drip-one {
+    left: 18px;
+
+    height: 48px;
+}
+
+.drip-two {
+    left: 98px;
+
+    height: 34px;
+}
+
+.drip-three {
+    right: 20px;
+
+    height: 50px;
+}
+
+
+/* Cake name */
+
+.cake-name {
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    top: 65px;
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    color:
+        #d4869f;
+
+    text-shadow:
+        1px 1px 0 white;
+}
+
+
+/* Cake hearts */
+
+.cake-decoration {
+    position: absolute;
+
+    color:
+        #e48ca9;
+
+    font-size: 16px;
+
+    bottom: 16px;
+}
+
+.decoration-one {
+    left: 35px;
+}
+
+.decoration-two {
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+}
+
+.decoration-three {
+    right: 35px;
+}
+
+
+/* Cake board */
+
+.cake-board {
+    position: absolute;
+
+    z-index: 1;
+
+    left: 18px;
+
+    bottom: 7px;
+
+    width: 304px;
+
+    height: 18px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #f8d9e2,
+            #eab9c9
+        );
+
+    box-shadow:
+        0 7px 15px
+        rgba(0, 0, 0, 0.25);
+}
+
+
+/* ===============================
+   MICROPHONE
+================================ */
+
+#mic-area {
+    margin-top: -5px;
+}
+
+#mic-instruction {
+    font-size: 15px;
+
+    line-height: 1.5;
+
+    opacity: 0.85;
+
+    margin-top: 0;
+}
+
+#mic-button {
+    margin-top: 5px;
+}
+
+#mic-status {
+    margin-top: 10px;
+
+    font-size: 16px;
+
+    color:
+        #ffb6dd;
+
+    font-weight: bold;
+
+    animation:
+        micPulse 1s ease-in-out infinite;
+}
+
+#blow-meter {
+    width: 220px;
+
+    height: 8px;
+
+    margin: 10px auto 0;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    background:
+        rgba(255, 255, 255, 0.15);
+}
+
+#blow-meter-fill {
+    width: 0%;
+
+    height: 100%;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff9bd2,
+            #ff3fac
+        );
+
+    transition:
+        width 0.08s linear;
+}
+
+
+/* ===============================
+   CAKE COMPLETION
+================================ */
+
+#cake-complete {
+    margin-top: 8px;
+
+    animation:
+        messageAppear 0.7s ease;
+}
+
+.wish-celebration {
+    font-size: 34px;
+
+    margin-bottom: 0;
+}
+
+#cake-complete h3 {
+    font-size: 27px;
+
+    margin: 2px 0;
+}
+
+#cake-complete p {
+    margin: 3px 0;
+}
+
+#cake-next-button {
+    margin-top: 8px;
+}
+
+
+/* ===============================
+   HIDDEN
+================================ */
+
+.hidden {
+    display: none !important;
+}
+
+
+/* ===============================
+   ANIMATIONS
+================================ */
+
+@keyframes floatCake {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes balloonFloat {
+
+    0%,
+    100% {
+        margin-top: 0;
+    }
+
+    50% {
+        margin-top: -10px;
+    }
+}
+
+@keyframes birthdayGlow {
+
+    from {
+        text-shadow:
+            0 0 5px #ffffff,
+            0 0 10px #ffb6e6,
+            0 0 20px #ff8bd4,
+            0 0 30px #ff5fc7;
+    }
+
+    to {
+        text-shadow:
+            0 0 10px #ffffff,
+            0 0 20px #ffb6e6,
+            0 0 35px #ff8bd4,
+            0 0 60px #ff3fbd,
+            0 0 90px #ff3fbd;
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    45% {
+        opacity: 1;
+    }
+
+    50%,
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes cardAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+@keyframes challengeAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+@keyframes angelAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            scale(0.7);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+}
+
+@keyframes angelFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-12px);
+    }
+}
+
+@keyframes questionAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(15px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+@keyframes hintPulse {
+
+    0%,
+    100% {
+        opacity: 0.55;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes boxShake {
+
+    0% {
+        transform: rotate(0deg);
+    }
+
+    20% {
+        transform: rotate(-5deg);
+    }
+
+    40% {
+        transform: rotate(5deg);
+    }
+
+    60% {
+        transform: rotate(-4deg);
+    }
+
+    80% {
+        transform: rotate(4deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes messageAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px)
+            scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+@keyframes heartFloat {
+
+    0%,
+    100% {
+        transform:
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            translateY(-7px);
+    }
+}
+
+@keyframes cakeAppear {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+@keyframes teddyFloat {
+
+    0%,
+    100% {
+        margin-top: 0;
+    }
+
+    50% {
+        margin-top: -5px;
+    }
+}
+
+@keyframes flameFlicker {
+
+    from {
+        transform:
+            rotate(-3deg)
+            scale(0.95);
+    }
+
+    to {
+        transform:
+            rotate(4deg)
+            scale(1.05);
+    }
+}
+
+@keyframes micPulse {
+
+    0%,
+    100% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .birthday-card {
+        width: 96%;
+
+        max-height:
+            calc(100vh - 20px);
+
+        padding:
+            30px 20px;
+    }
+
+    .challenge h2 {
+        font-size: 27px;
+    }
+
+    .challenge p {
+        font-size: 15px;
+    }
+
+    #balloon-area {
+        height: 200px;
+    }
+
+    .balloon {
+        width: 46px;
+
+        height: 60px;
+    }
+
+    .quiz-question h3 {
+        font-size: 19px;
+    }
+
+    .quiz-option {
+        font-size: 15px;
+
+        padding: 12px 14px;
+    }
+
+    #mystery-message p {
+        font-size: 15px;
+
+        line-height: 1.55;
+    }
+
+    #birthday-cake {
+        transform:
+            scale(0.72);
+
+        transform-origin:
+            top center;
+
+        margin:
+            0 auto -55px;
+    }
+
+    #cake-challenge {
+        padding-bottom: 5px;
+    }
+
+    #mic-area {
+        margin-top: -5px;
+    }
+
+    #cake-complete {
+        margin-top: 5px;
+    }
+}

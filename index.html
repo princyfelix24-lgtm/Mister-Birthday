@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mister's Birthday</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="birthday-card">
+
+        <div class="cake">🎂</div>
+
+        <div class="small-text">
+            A little birthday surprise
+        </div>
+
+        <h1>
+            <span id="typing-text"></span>
+            <span class="cursor">|</span>
+        </h1>
+
+        <p class="subtitle">
+            Someone has prepared something special for you...
+            but you have to complete a few little challenges first. 👀
+        </p>
+
+        <button id="start-button">
+            Begin Your Birthday Mission ✨
+        </button>
+
+
+        <!-- ===============================
+             CHALLENGE 01 - BALLOONS
+        ================================ -->
+
+        <section id="balloon-challenge" class="challenge hidden">
+
+            <div class="challenge-label">
+                CHALLENGE 01
+            </div>
+
+            <h2>
+                Pop the Balloons! 🎈
+            </h2>
+
+            <p>
+                There are balloons hiding around...
+                <br>
+                Pop all of them to continue! 👀
+            </p>
+
+            <div id="balloon-area"></div>
+
+            <div id="balloon-score">
+                Balloons popped:
+                <span id="score">0</span> / 5
+            </div>
+
+            <div id="balloon-complete" class="hidden">
+
+                <div class="complete-icon">
+                    🎉
+                </div>
+
+                <h3>
+                    You did it!
+                </h3>
+
+                <p>
+                    First challenge completed. 💗
+                </p>
+
+                <button id="next-button">
+                    Continue ✨
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ===============================
+             ANGEL TRANSITION
+        ================================ -->
+
+        <section id="angel-transition" class="hidden">
+
+            <div class="angel">
+                👼
+            </div>
+
+            <p>
+                Something special is waiting... ✨
+            </p>
+
+        </section>
+
+
+        <!-- ===============================
+             CHALLENGE 02 - PERSONALITY QUIZ
+        ================================ -->
+
+        <section id="quiz-challenge" class="challenge hidden">
+
+            <div class="challenge-label">
+                CHALLENGE 02
+            </div>
+
+            <h2>
+                Let's See What You're Like... 👀
+            </h2>
+
+            <p>
+                Answer these honestly.
+                <br>
+                No right or wrong answers. 🤎
+            </p>
+
+
+            <!-- QUESTION 1 -->
+
+            <div class="quiz-question" id="question-1">
+
+                <div class="question-number">
+                    QUESTION 01
+                </div>
+
+                <h3>
+                    You suddenly get ₹10,000.
+                    What's the first thing you do?
+                </h3>
+
+                <div class="quiz-options">
+
+                    <button class="quiz-option" data-question="1" data-answer="A">
+                        🍔 FOOD. Obviously.
+                    </button>
+
+                    <button class="quiz-option" data-question="1" data-answer="B">
+                        🛍️ Buy something I've wanted.
+                    </button>
+
+                    <button class="quiz-option" data-question="1" data-answer="C">
+                        💰 Save it.
+                    </button>
+
+                    <button class="quiz-option" data-question="1" data-answer="D">
+                        ❤️ Take someone out.
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUESTION 2 -->
+
+            <div class="quiz-question hidden" id="question-2">
+
+                <div class="question-number">
+                    QUESTION 02
+                </div>
+
+                <h3>
+                    What's your biggest weakness?
+                </h3>
+
+                <div class="quiz-options">
+
+                    <button class="quiz-option" data-question="2" data-answer="A">
+                        ❤️ Fear of losing close ones.
+                    </button>
+
+                    <button class="quiz-option" data-question="2" data-answer="B">
+                        🧠 Overthinking about everything.
+                    </button>
+
+                    <button class="quiz-option" data-question="2" data-answer="C">
+                        👀 Procrastination.
+                    </button>
+
+                    <button class="quiz-option" data-question="2" data-answer="D">
+                        💸 Spending money.
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUESTION 3 -->
+
+            <div class="quiz-question hidden" id="question-3">
+
+                <div class="question-number">
+                    QUESTION 03
+                </div>
+
+                <h3>
+                    When someone you really care about
+                    is going through a difficult time,
+                    what do you usually do?
+                </h3>
+
+                <div class="quiz-options">
+
+                    <button class="quiz-option" data-question="3" data-answer="A">
+                        🫂 Stay beside them,
+                        even if I don't know what to say.
+                    </button>
+
+                    <button class="quiz-option" data-question="3" data-answer="B">
+                        🧠 Try to find a solution to their problem.
+                    </button>
+
+                    <button class="quiz-option" data-question="3" data-answer="C">
+                        💬 Keep checking on them until they're okay.
+                    </button>
+
+                    <button class="quiz-option" data-question="3" data-answer="D">
+                        🤐 Give them space,
+                        but make sure they know I'm there.
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUESTION 4 -->
+
+            <div class="quiz-question hidden" id="question-4">
+
+                <div class="question-number">
+                    QUESTION 04
+                </div>
+
+                <h3>
+                    When someone misunderstands you,
+                    what do you usually do?
+                </h3>
+
+                <div class="quiz-options">
+
+                    <button class="quiz-option" data-question="4" data-answer="A">
+                        🗣️ Explain myself immediately.
+                    </button>
+
+                    <button class="quiz-option" data-question="4" data-answer="B">
+                        🤐 Stay quiet and let things settle down.
+                    </button>
+
+                    <button class="quiz-option" data-question="4" data-answer="C">
+                        🧠 Think about what happened
+                        before I respond.
+                    </button>
+
+                    <button class="quiz-option" data-question="4" data-answer="D">
+                        😅 Make a joke and try to move on.
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUESTION 5 -->
+
+            <div class="quiz-question hidden" id="question-5">
+
+                <div class="question-number">
+                    QUESTION 05
+                </div>
+
+                <h3>
+                    If you had a chance to change
+                    one decision in your life,
+                    what would it be?
+                </h3>
+
+                <div class="quiz-options">
+
+                    <button class="quiz-option" data-question="5" data-answer="A">
+                        ❤️ Choose someone I lost or loved.
+                    </button>
+
+                    <button class="quiz-option" data-question="5" data-answer="B">
+                        🎯 Choose the career I truly wanted.
+                    </button>
+
+                    <button class="quiz-option" data-question="5" data-answer="C">
+                        🔄 Change a decision I made.
+                    </button>
+
+                    <button class="quiz-option" data-question="5" data-answer="D">
+                        ✨ Become a more successful person.
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div id="quiz-progress">
+                Question <span id="current-question">1</span> / 5
+            </div>
+
+        </section>
+
+
+        <!-- ===============================
+             CHALLENGE 03 - MYSTERY BOX
+        ================================ -->
+
+        <section id="mystery-challenge" class="challenge hidden">
+
+            <div class="challenge-label">
+                CHALLENGE 03
+            </div>
+
+            <h2>
+                A Little Something for You... 🎁
+            </h2>
+
+            <p>
+                Not everything in life can be controlled.
+                <br>
+                But maybe this little box has something to say.
+            </p>
+
+
+            <div id="mystery-box-area">
+
+                <button id="mystery-box" aria-label="Open the mystery box">
+
+                    <span class="box-lid"></span>
+
+                    <span class="box-body">
+
+                        <span class="box-ribbon-vertical"></span>
+
+                        <span class="box-ribbon-horizontal"></span>
+
+                    </span>
+
+                </button>
+
+                <div id="box-hint">
+                    Tap the box to open it 👀
+                </div>
+
+            </div>
+
+
+            <div id="mystery-message" class="hidden">
+
+                <div class="message-heart">
+                    🤎
+                </div>
+
+                <p>
+                    You may lose things, make mistakes, face
+                    unexpected troubles, or have days when
+                    everything feels like it's going wrong.
+                    Don't let those moments make you believe
+                    you're a failure.
+                </p>
+
+                <p>
+                    You are allowed to be human, to learn,
+                    to fall, and to begin again.
+                    Keep that warm smile, keep moving forward
+                    and remember, you don't have to carry
+                    every difficult moment alone...My dear Mister🤎 
+                </p>
+
+                <button id="mystery-next-button">
+                    Continue ✨
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ===============================
+             CHALLENGE 04 - BIRTHDAY CAKE
+        ================================ -->
+
+        <section id="cake-challenge" class="challenge hidden">
+
+            <div class="challenge-label">
+                CHALLENGE 04
+            </div>
+
+            <h2>
+                Make a Wish, Mister... 🎂
+            </h2>
+
+            <p>
+                One little birthday wish is waiting for you.
+                <br>
+                But first... you have to blow out the candle. 🕯️
+            </p>
+
+
+            <!-- CAKE -->
+
+            <div id="birthday-cake">
+
+                <!-- Teddy bears -->
+
+                <div class="teddy teddy-left">
+                    🧸
+                </div>
+
+                <div class="teddy teddy-right">
+                    🧸
+                </div>
+
+                <!-- Pink bow -->
+
+                <div class="cake-bow">
+                    <span></span>
+                    <span></span>
+                    <div></div>
+                </div>
+
+
+                <!-- Candle -->
+
+                <div class="candle">
+
+                    <div id="candle-flame"></div>
+
+                    <div class="candle-stick"></div>
+
+                </div>
+
+
+                <!-- Cake top -->
+
+                <div class="cake-top">
+
+                    <div class="cake-cream"></div>
+
+                </div>
+
+
+                <!-- Cake body -->
+
+                <div class="cake-body">
+
+                    <div class="cake-drip drip-one"></div>
+                    <div class="cake-drip drip-two"></div>
+                    <div class="cake-drip drip-three"></div>
+
+                    <div class="cake-name">
+                        MISTER
+                    </div>
+
+                    <div class="cake-decoration decoration-one">
+                        ♥
+                    </div>
+
+                    <div class="cake-decoration decoration-two">
+                        ♥
+                    </div>
+
+                    <div class="cake-decoration decoration-three">
+                        ♥
+                    </div>
+
+                </div>
+
+                <div class="cake-board"></div>
+
+            </div>
+
+
+            <!-- MICROPHONE AREA -->
+
+            <div id="mic-area">
+
+                <p id="mic-instruction">
+                    Tap below to allow your microphone,
+                    <br>
+                    then blow toward it! 💨
+                </p>
+
+                <button id="mic-button">
+                    🎤 Enable Microphone
+                </button>
+
+                <div id="mic-status" class="hidden">
+                    Listening... Now blow! 💨
+                </div>
+
+                <div id="blow-meter" class="hidden">
+
+                    <div id="blow-meter-fill"></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SUCCESS -->
+
+            <div id="cake-complete" class="hidden">
+
+                <div class="wish-celebration">
+                    🎉✨🎉
+                </div>
+
+                <h3>
+                    Wish made! 🤎
+                </h3>
+
+                <p>
+                    That candle didn't stand a chance.
+                </p>
+
+                <button id="cake-next-button">
+                    Continue ✨
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
